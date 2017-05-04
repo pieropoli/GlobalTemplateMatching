@@ -15,6 +15,9 @@ d = dir(sacdir);d(1:2)=[];
 for i1 = 1 : length(d)
     s = readsac([sacdir '/' d(i1).name]);
     dist = (str2double(s.staname)-1)*0.5;
+    [a1,b1]=butter(2,[0.1 1]*2*s.tau);
+    s.trace = filtfilt(a1,b1,s.trace);
+    
     
     % make average trace
     T = 1 : win/s.tau : length(s.trace)-1;
@@ -42,7 +45,7 @@ for iagc = 1 : length(Tagc)
 
 end
 
-save datatest AGC
+save datatest_filt AGC
 
 AGCbin = AGC;
 %% remove NaN
@@ -62,4 +65,4 @@ for ix = 1 : size(AGC,1)
 end 
 
 
-save template AGCbin
+save template_filt AGCbin
