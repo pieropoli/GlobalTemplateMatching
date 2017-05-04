@@ -65,4 +65,4 @@ for ix = 1 : size(AGC,1)
 end 
 
 
-save template_filt AGCbin_filt
+save template_filt AGCbin

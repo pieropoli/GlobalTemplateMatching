@@ -2,8 +2,8 @@ clear
 clc
 close
 
-load template_filt
-load datatest_filt
+load template
+load datatest
 
 for ix = 1 : size(AGCbin,1)
     for iy = 1 : size(AGCbin,2)
@@ -56,8 +56,9 @@ imagesc(detfake);colorbar
 
 
 subplot(325)
+
 plot(Cdotreal)
-ylim([0 1000])
+ylim([0 max(Cdotreal)])
 subplot(326)
 plot(Cdotfake)
-ylim([0 1000])
+ylim([0 max(Cdotreal)])

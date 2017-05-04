@@ -36,7 +36,7 @@ Tagc = Nbefore:1:size(smean,2)-Nbefore;
 
 for iagc = 1 : length(Tagc)
 
-    tmp =  smean(:,Tagc(iagc):Tagc(iagc)+Nbefore-1);
+    tmp =  smean(:,Tagc(iagc)-Nbefore+1:Tagc(iagc));
     meanagc = mean(tmp,2);
     AGC(:,Tagc(iagc)) = smean(:,Tagc(iagc))./meanagc;
 
