@@ -42,6 +42,8 @@ for iagc = 1 : length(Tagc)
 
 end
 
+save datatest AGC
+
 AGCbin = AGC;
 %% remove NaN
 
@@ -49,7 +51,7 @@ for ix = 1 : size(AGC,1)
     for iy = 1 : size(AGC,2)
         
         
-        if isnan(AGC(ix,iy)) ==1 || AGC(ix,iy)<3
+        if isnan(AGC(ix,iy)) ==1 %|| AGC(ix,iy)<3
             
             
             AGCbin(ix,iy)=0;
@@ -59,3 +61,6 @@ for ix = 1 : size(AGC,1)
         end
     end
 end 
+
+
+save template AGCbin
