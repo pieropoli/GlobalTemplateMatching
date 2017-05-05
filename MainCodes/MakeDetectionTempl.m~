@@ -1,0 +1,90 @@
+clear
+clc
+close
+
+%%  make templates
+sacdir = 'Synth';
+d = dir(sacdir);d(1:2)=[];
+load('/Users/pieropoli/Autmoatic_Parsing_Downloading_Events/RepeatingEvents/RepeatingFromMatMatrix/src/travelTime_directPprem_0_700kmdepth_0_90distance.mat');
+
+for i1 = 1: length(d)
+    
+    load([sacdir '/' d(i1).name]);
+    
+    %  [tP] =GetTraveltimeFast(dist,0,depth,ddist,ttime);
+    
+    
+    F = find(staltaout<3);
+    F2 = find(staltaout>3);
+    %      staltaout(F)=0;
+    %      staltaout(F2)=1;
+    
+    temp(i1,:) = staltaout;
+    dd(i1) = dist;
+    % TP(i1)=tP;
+    
+end
+
+[dd,ix] = sort(dd);
+temp = temp(ix,:);
+
+
+%% make data
+% read synthetic sac files
+sacdir = 'RealData';
+d = dir(sacdir);d(1:2)=[];
+
+for i1 = 1: length(d)
+    
+    load([sacdir '/' d(i1).name]);
+    F = find(staltaout<2);
+    F2 = find(staltaout>2);
+    
+    data(i1,:) = staltaout;
+    la(i1) = lat;
+    lo(i1) = lon;
+    
+    
+end
+
+
+%% make detection
+load('points.mat')
+det = zeros(length(lat),length(lon),size(data,2));
+
+X = lon;
+Y = lat;
+
+idy = 1 : 
+
+for iy = 1 : length(Y)
+    
+    
+    D = distance(Y(iy),X(iy),la,lo);
+    [D,IX] = sort(D);
+    rtmp = data(IX,:);
+    
+    
+    % buid synth matrix
+    temp1=zeros(length(D),size(temp,2));
+    
+    for is = 1 : length(D)
+        [~,F] = min(abs(D(is)-dd));
+        temp1(is,:) = temp(F,:);
+    end
+    
+    for i1 = 1 : 5000 %size(rtmp,2) - size(temp,2) - 1
+        
+        tmp = rtmp(:,i1:i1+size(temp1,2)-1) ;
+        
+        ctmp = dot(tmp,temp1,2);
+        
+        det(iy,iy,i1) = max(ctmp);
+        clear tmp ctmp
+        
+    end
+    
+    
+    
+    
+end

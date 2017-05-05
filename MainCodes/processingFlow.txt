@@ -1,0 +1,13 @@
+--processing for daily scanning--
+
+1) Download data (DMT)
+2) Read data in matlab (ParserContinuosData_network.m)
+3) Make STA LTA cont. data (mkSTALTAdata.m)
+4) Make the detection (MakeDetectionTempl.m)
+
+
+--------------------------------
+TO DO:
+a) points 2 and 3 can be done in a single step
+b) add some quality control for stations
+c) tests some diferent parameters and earthquakes of different magnitudes
