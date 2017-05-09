@@ -1,5 +1,7 @@
 --processing for daily scanning--
 
+day, STA, LTA, FB
+
 1) Download data (DMT)
 2) Read data in matlab (ParserContinuosData_network.m)
 3) Make STA LTA cont. data (mkSTALTAdata.m)

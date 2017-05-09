@@ -18,8 +18,8 @@ for i1 = 1: length(d)
     
     F = find(staltaout<2);
     F2 = find(staltaout>2);
-    staltaout(F)=0;
-    staltaout(F2)=1;
+    %staltaout(F)=0;
+    %staltaout(F2)=1;
     
     temp(i1,:) = staltaout;
     dd(i1) = dist;
@@ -53,12 +53,8 @@ end
 % load points on the Earth surface
 load('points.mat')
 det = zeros(length(lon),size(data,2));
-
 X = lon;
 Y = lat;
-
-
-
 % from here the code need to go much faster
 for iy = 1 : length(Y) % loop over points
     
@@ -79,6 +75,8 @@ for iy = 1 : length(Y) % loop over points
     for i1 = 1: size(rtmp,2) - size(temp,2) - 1 % loop over time
         
         tmp = rtmp(:,i1:i1+size(temp1,2)-1) ;
+        
+        
         for id = 1 : size(tmp,1) % this can be done in matrix form!!!
         cctmp(id) =  corrc_norm(tmp(id,:),temp1(id,:));
         end
